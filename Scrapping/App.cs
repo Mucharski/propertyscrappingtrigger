@@ -11,10 +11,11 @@ public class App
     private static readonly HttpClient Client = new ();
 
     [FunctionName("WebScrappingTrigger")]
-    public static async Task Trigger([TimerTrigger("* */5 * * * *")] TimerInfo myTimer,
+    public static async Task Trigger([TimerTrigger("* 0 8-18/4 * * *")] TimerInfo myTimer,
         ILogger log)
     {
         await Client.GetAsync(new Uri("https://propertyscrapping.azurewebsites.net/function/trigger"));
+        
         await Client.GetAsync(new Uri("https://propertyscrapping.azurewebsites.net/scrapper/imovelweb"));
     }
 }
